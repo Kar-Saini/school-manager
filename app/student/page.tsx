@@ -44,8 +44,8 @@ function AboutMe() {
 
 const INFORMATION: InformationType = {
   Name: "Utkarsh Patel",
-  Gender: "Shemale",
-  ["Father's Name"]: "Kartik Saini",
+  Gender: "Male",
+  ["Father's Name"]: "Patel",
   ["Mother's Name"]: "",
   DOB: "18 Dec 1999",
   ["Father's Ocuppation"]: "Service",
