@@ -87,8 +87,7 @@ function DesktopSidebarItems({
             {label}
           </p>
         </div>
-
-        {subMenu?.length > 1 && isOpen ? (
+        {subMenu && subMenu?.length > 1 && isOpen ? (
           <MdOutlineKeyboardArrowDown />
         ) : (
           <MdOutlineKeyboardArrowRight />
