@@ -167,7 +167,7 @@ const columns: ColumnType[] = [
 ];
 interface ColumnType {
   label: string;
-  accessor: string;
+  accessor: keyof DataType;
 }
 interface DataType {
   id: string;
