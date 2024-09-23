@@ -42,7 +42,7 @@ function AboutMe() {
   );
 }
 
-const INFORMATION = {
+const INFORMATION: InformationType = {
   Name: "Utkarsh Patel",
   Gender: "Shemale",
   ["Father's Name"]: "Kartik Saini",
@@ -57,6 +57,11 @@ const INFORMATION = {
   Address: "Lorem ipsum dolor sit amet",
   ["Phone Number"]: "123456789",
 };
+
+type InformationType = {
+  [key: string]: string;
+};
+
 function InformationSection() {
   return (
     <section className=" m-1 p-2 flex flex-col gap-y-2">
