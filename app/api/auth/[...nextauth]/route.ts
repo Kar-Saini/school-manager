@@ -13,6 +13,7 @@ export const authOptions: AuthOptions = {
         if (!credentials?.email || !credentials?.password) {
           throw new Error("Invalid Credentials");
         }
+        return { id: "1", name: "User", email: credentials.email };
       },
     }),
   ],
