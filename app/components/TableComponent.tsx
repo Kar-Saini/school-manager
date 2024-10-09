@@ -2,7 +2,9 @@ import React from "react";
 
 type TableProps = {
   columns: { header: string; key: string }[];
-  data: { [key: string]: any }[];
+  data: {
+    [key: string]: [value: string | { [key: string]: [value: string] }];
+  }[];
 };
 
 const TableComponent = ({ columns, data }: TableProps) => {

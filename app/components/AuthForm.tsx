@@ -2,10 +2,10 @@
 import axios from "axios";
 import Button from "./Button";
 import Input from "./Input";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { signIn, useSession } from "next-auth/react";
+import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
 type VARIANT = "LOGIN" | "REGISTER";

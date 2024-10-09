@@ -1,5 +1,4 @@
 import React from "react";
-import InformationCard from "@/app/components/InformationCard";
 
 const page = () => {
   return (

@@ -23,6 +23,6 @@ export async function GET() {
       return NextResponse.json({ message: "Success", classesArray });
     }
   } catch (error) {
-    throw new Error("Invalide call");
+    throw new Error("Invalide call" + error);
   }
 }
