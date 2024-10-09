@@ -1,10 +1,17 @@
 import React from "react";
+type Subject = {
+  id: string;
+  label: string;
+  classId: string;
+  class: {
+    id: string;
+    label: string;
+  };
+};
 
 type TableProps = {
-  columns: { header: string; key: string }[];
-  data: {
-    [key: string]: [value: string | { [key: string]: [value: string] }];
-  }[];
+  columns: { header: string; key: keyof Subject | "class" }[];
+  data: Subject[];
 };
 
 const TableComponent = ({ columns, data }: TableProps) => {
