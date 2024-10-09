@@ -33,6 +33,6 @@ export async function GET(res: NextApiResponse) {
     });
     return NextResponse.json(subjects);
   } catch (error) {
-    res.status(500).json({ error: "Unable to fetch subjects" });
+    res.status(500).json({ error: "Unable to fetch subjects", err: error });
   }
 }
