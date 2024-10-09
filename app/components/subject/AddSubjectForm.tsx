@@ -1,8 +1,8 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import AddSubjectFormInput from "./AddSubjectFormInput";
 import { IoMdClose } from "react-icons/io";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 const AddSubjectForm = ({
   isOpen,
@@ -24,26 +24,22 @@ const AddSubjectForm = ({
   }, []);
 
   async function handleSubmit() {
-    if (subjectName !== "" && classValue !== "") {
+    if (subjectName !== "") {
+      console.log("Req sent");
       const result = await axios.post("/api/subject", {
         subjectName,
         classValue,
       });
-      console.log(result);
+      if (result.status === 200) {
+        toast.success(result.data.message);
+        handleReset();
+      }
     }
   }
 
   function handleReset() {
     setSubjectName("");
-    setClassValue("");
-  }
-
-  function handleSubjectNameChange(event: React.ChangeEvent<HTMLInputElement>) {
-    setSubjectName(event.target.value);
-  }
-
-  function handleClassValueChange(event: React.ChangeEvent<HTMLSelectElement>) {
-    setClassValue(event.target.value);
+    setClassValue("Select Class");
   }
 
   return isOpen ? (
@@ -58,11 +54,18 @@ const AddSubjectForm = ({
             }}
           />
         </div>
-        <AddSubjectFormInput
-          label="Subject Name"
-          value={subjectName}
-          onChangeFunction={handleSubjectNameChange}
-        />
+        <div className="flex flex-col gap-y-2">
+          <label htmlFor="subjectName">Subject Name</label>
+          <input
+            type="text"
+            id="subjectName"
+            value={subjectName}
+            onChange={(event) => {
+              setSubjectName(event.target.value);
+            }}
+            className="py-2 px-4 outline-none rounded-md"
+          />
+        </div>
         <div className="flex flex-col gap-y-2">
           <label htmlFor="class">Class</label>
           <select
@@ -70,7 +73,9 @@ const AddSubjectForm = ({
             id="class"
             className="rounded-md outline-none px-2 py-2"
             value={classValue}
-            onChange={handleClassValueChange}
+            onChange={(event) => {
+              setClassValue(event.target.value);
+            }}
           >
             <option value="">Select Class</option>
             {classes &&
