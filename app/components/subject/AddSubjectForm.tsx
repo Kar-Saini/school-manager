@@ -4,6 +4,11 @@ import { IoMdClose } from "react-icons/io";
 import axios from "axios";
 import toast from "react-hot-toast";
 
+type Class = {
+  id: string;
+  label: string;
+};
+
 const AddSubjectForm = ({
   isOpen,
   setIsOpen,
@@ -13,7 +18,7 @@ const AddSubjectForm = ({
 }) => {
   const [subjectName, setSubjectName] = useState("");
   const [classValue, setClassValue] = useState("");
-  const [classes, setClasses] = useState([]);
+  const [classes, setClasses] = useState<Class[]>([]);
 
   useEffect(() => {
     async function getClassesData() {
