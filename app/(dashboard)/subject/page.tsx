@@ -1,8 +1,8 @@
 "use client";
 import React, { useState } from "react";
-import PageHeading from "../../api/components/PageHeading";
-import AddSubjectForm from "../../api/components/subject/AddSubjectForm";
-import AllSubjectTable from "@/app/api/components/subject/AllSubjectTable";
+import PageHeading from "../../components/PageHeading";
+import AddSubjectForm from "../../components/subject/AddSubjectForm";
+import AllSubjectTable from "@/app/components/subject/AllSubjectTable";
 
 const SubjectPage = () => {
   const [isOpen, setIsOpen] = useState(true);

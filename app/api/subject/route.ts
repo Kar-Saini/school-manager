@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "../../libs/prismadb";
-import { NextApiResponse } from "next";
 
 export async function POST(request: NextRequest) {
   try {
@@ -26,13 +25,13 @@ export async function POST(request: NextRequest) {
   }
 }
 
-export async function GET(res: NextApiResponse) {
+export async function GET() {
   try {
     const subjects = await prisma.subject.findMany({
       include: { class: true },
     });
     return NextResponse.json(subjects);
   } catch (error) {
-    res.status(500).json({ error: "Unable to fetch subjects", err: error });
+    return NextResponse.json({ error: "Unable to fetch subjects", err: error });
   }
 }

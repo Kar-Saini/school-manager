@@ -1,6 +1,6 @@
 import React from "react";
-import { Sidebar } from "@/app/api/components/sidebar/Sidebar";
-import Appbar from "@/app/api/components/Appbar";
+import { Sidebar } from "@/app/components/sidebar/Sidebar";
+import Appbar from "@/app/components/Appbar";
 
 const StudentLayout = ({ children }: { children: React.ReactNode }) => {
   return (
