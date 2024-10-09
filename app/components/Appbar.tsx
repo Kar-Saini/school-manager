@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { IoIosSearch } from "react-icons/io";
 import { CiUser } from "react-icons/ci";
 import { IoIosNotificationsOutline } from "react-icons/io";
@@ -7,7 +7,7 @@ import { CiMail } from "react-icons/ci";
 
 const Appbar = () => {
   return (
-    <div className=" shadow-md h-[44px] py-1 flex items-center w-full justify-between px-6">
+    <div className=" shadow-md h-[60px] flex items-center w-full justify-between">
       <div className="hidden mx-2 md:flex flex-1 items-center gap-2  h-full px-2 rounded-sm ">
         <IoIosSearch className="text-xl text-neutral-500 hover:scale-105 hover:cursor-pointer transition" />
         <input

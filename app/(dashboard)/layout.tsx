@@ -1,15 +1,15 @@
 import React from "react";
-import { Sidebar } from "../components/Sidebar";
-import Appbar from "../components/Appbar";
+import { Sidebar } from "@/app/components/sidebar/Sidebar";
+import Appbar from "@/app/components/Appbar";
 
 const StudentLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <Sidebar>
-      <main className=" h-full w-full">
+    <main className="h-full w-full">
+      <Sidebar>
         <Appbar />
         {children}
-      </main>
-    </Sidebar>
+      </Sidebar>
+    </main>
   );
 };
 

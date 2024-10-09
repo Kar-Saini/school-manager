@@ -1,0 +1,109 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Student {
+  id            String    @id @default(cuid())
+  name          String
+  email         String    @unique
+  username      String?
+  password      String
+  sex           Sex
+  role          Role
+  dob           String
+  admissionDate String
+  bloodGroup    String?
+  parentId      String?
+  parent        Parent?   @relation(fields: [parentId], references: [id])
+  teachers      Teacher[]
+  subjects      Subject[]
+  classId       String?
+  class         Class?    @relation(fields: [classId], references: [id])
+  exams         Exam[]
+}
+
+model Parent {
+  id            String    @id @default(cuid())
+  fatherName    String
+  motherName    String
+  email         String    @unique
+  username      String?   @unique
+  role          Role
+  address       String
+  contactNumber String
+  annualIncome  String
+  studentId     String
+  student       Student[]
+}
+
+enum Sex {
+  Male
+  Female
+}
+
+model Teacher {
+  id            String    @id @default(cuid())
+  name          String
+  joiningDate   String?
+  bloodGroup    String
+  address       String
+  contactNumber String
+  email         String    @unique
+  password      String
+  username      String?   @unique
+  role          Role
+  subject       Subject[]
+  student       Student[]
+  classes       Class[]
+  exams         Exam[]
+}
+
+model Subject {
+  id       String    @id @default(cuid())
+  label    String
+  classId  String
+  class    Class     @relation(fields: [classId], references: [id])
+  teachers Teacher[] 
+  students Student[]
+}
+
+model Class {
+  id       String    @id @default(cuid())
+  label    String    @unique
+  subjects Subject[]
+  students Student[]
+  teachers Teacher[]
+  exams    Exam[]
+}
+
+model Exam {
+  id       String   @id @default(cuid())
+  examType ExamType
+
+  teacherId String
+  teacher   Teacher @relation(fields: [teacherId], references: [id])
+
+  classId String
+  class   Class  @relation(fields: [classId], references: [id])
+
+  students Student[]
+}
+
+enum ExamType {
+  unitTest
+  classTest
+  midSemester
+  endSemester
+}
+
+enum Role {
+  Student
+  Teacher
+  Parent
+  Admin
+}
