@@ -16,19 +16,19 @@ export default function AboutMe() {
           </p>
         </section>
       </div>
-      <InformationSection />
+      {/* <InformationSection /> */}
     </div>
   );
 }
-function InformationSection() {
-  return (
-    <section className=" m-1 p-2 flex flex-col gap-y-2">
-      {Object.keys(INFORMATION).map((key) => (
-        <section key={key} className="flex text-sm ">
-          <p className="flex-1 text-neutral-600">{key}</p>
-          <p className="flex-1">{INFORMATION[key]}</p>
-        </section>
-      ))}
-    </section>
-  );
-}
+// function InformationSection() {
+//   return (
+//     <section className=" m-1 p-2 flex flex-col gap-y-2">
+//       {Object.keys(INFORMATION).map((key) => (
+//         <section key={key} className="flex text-sm ">
+//           <p className="flex-1 text-neutral-600">{key}</p>
+//           <p className="flex-1">{INFORMATION[key]}</p>
+//         </section>
+//       ))}
+//     </section>
+//   );
+// }
