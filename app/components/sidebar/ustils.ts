@@ -1,4 +1,3 @@
-import { TbDashboard } from "react-icons/tb";
 import { PiStudent } from "react-icons/pi";
 import { IoIosPeople } from "react-icons/io";
 import { BsFillPeopleFill } from "react-icons/bs";
@@ -20,18 +19,6 @@ export interface DesktopSidebarMenuItem extends SubMenu {
 }
 
 export const DESKTOP_SIDEBAR_ITEMS: DesktopSidebarMenuItem[] = [
-  // {
-  //   label: "Dashboard",
-  //   icon: TbDashboard,
-  //   key: "1",
-  //   href: "/dashboard",
-  //   submenu: [
-  //     { label: "Admin", key: "11", href: "/admin" },
-  //     { label: "Students", key: "12", href: "/student" },
-  //     { label: "Teachers", key: "13", href: "/teacher" },
-  //     { label: "Parents", key: "14", href: "/parent" },
-  //   ],
-  // },
   {
     label: "Students",
     icon: PiStudent,
