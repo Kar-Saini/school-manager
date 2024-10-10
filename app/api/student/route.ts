@@ -32,3 +32,12 @@ export async function POST(request: NextRequest) {
     });
   }
 }
+
+export async function GET() {
+  try {
+    const allStudents = await prisma?.student.findMany();
+    return NextResponse.json({ message: "Success", allStudents });
+  } catch (error) {
+    return NextResponse.json({ error: "Error in fetching data", err: error });
+  }
+}

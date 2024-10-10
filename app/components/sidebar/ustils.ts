@@ -12,6 +12,7 @@ export interface SubMenu {
   label: string;
   icon?: React.ComponentType;
   key: string;
+  href?: string;
 }
 
 export interface DesktopSidebarMenuItem extends SubMenu {
@@ -19,21 +20,23 @@ export interface DesktopSidebarMenuItem extends SubMenu {
 }
 
 export const DESKTOP_SIDEBAR_ITEMS: DesktopSidebarMenuItem[] = [
-  {
-    label: "Dashboard",
-    icon: TbDashboard,
-    key: "1",
-    submenu: [
-      { label: "Admin", key: "11" },
-      { label: "Students", key: "12" },
-      { label: "Teachers", key: "13" },
-      { label: "Parents", key: "14" },
-    ],
-  },
+  // {
+  //   label: "Dashboard",
+  //   icon: TbDashboard,
+  //   key: "1",
+  //   href: "/dashboard",
+  //   submenu: [
+  //     { label: "Admin", key: "11", href: "/admin" },
+  //     { label: "Students", key: "12", href: "/student" },
+  //     { label: "Teachers", key: "13", href: "/teacher" },
+  //     { label: "Parents", key: "14", href: "/parent" },
+  //   ],
+  // },
   {
     label: "Students",
     icon: PiStudent,
     key: "2",
+    href: "/student",
     submenu: [
       { label: "All Students", key: "21" },
       { label: "Student Detail", key: "22" },
@@ -45,6 +48,7 @@ export const DESKTOP_SIDEBAR_ITEMS: DesktopSidebarMenuItem[] = [
     label: "Parents",
     icon: BsFillPeopleFill,
     key: "3",
+    href: "/parent",
     submenu: [
       { label: "All Parents", key: "31" },
       { label: "Parents Detail", key: "32" },
@@ -56,6 +60,7 @@ export const DESKTOP_SIDEBAR_ITEMS: DesktopSidebarMenuItem[] = [
     label: "Teachers",
     icon: IoIosPeople,
     key: "4",
+    href: "/teacher",
     submenu: [
       { label: "All Teachers", key: "41" },
       { label: "Teacher Detail", key: "42" },

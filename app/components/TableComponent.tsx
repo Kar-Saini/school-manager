@@ -1,4 +1,5 @@
 import React from "react";
+
 type Subject = {
   id: string;
   label: string;
@@ -8,10 +9,21 @@ type Subject = {
     label: string;
   };
 };
-
+type Student = {
+  id: string;
+  name: string;
+  email: string;
+  dob: string;
+  sex: string;
+  bloodGroup: string;
+  admissionDate: string;
+};
 type TableProps = {
-  columns: { header: string; key: keyof Subject | "class" }[];
-  data: Subject[];
+  columns: {
+    header: string;
+    key: keyof Subject | "class" | keyof Student | string;
+  }[];
+  data: Subject[] | Student[];
 };
 
 const TableComponent = ({ columns, data }: TableProps) => {

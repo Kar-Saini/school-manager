@@ -53,6 +53,7 @@ const DesktopSidebar = () => {
             isOpen={openItem === item.key}
             subMenu={item.submenu}
             collapse={collapse}
+            href={item.href}
           />
         ))}
       </div>
@@ -68,6 +69,7 @@ function DesktopSidebarItems({
   isOpen,
   subMenu,
   collapse,
+  href,
 }: {
   label: string;
   icon: React.ComponentType;
@@ -76,6 +78,7 @@ function DesktopSidebarItems({
   isOpen?: boolean;
   subMenu?: SubMenu[] | undefined;
   collapse: boolean;
+  href?: string;
 }) {
   const router = useRouter();
   return (
@@ -97,7 +100,16 @@ function DesktopSidebarItems({
         >
           <Icon />
           {!collapse && (
-            <p className="text-sm text-neutral-200 tracking-wider">{label}</p>
+            <p
+              className="text-sm text-neutral-200 tracking-wider"
+              onClick={() => {
+                if (href) {
+                  router.push(href);
+                }
+              }}
+            >
+              {label}
+            </p>
           )}
         </div>
         {subMenu &&
@@ -111,7 +123,11 @@ function DesktopSidebarItems({
       {!collapse &&
         isOpen &&
         subMenu?.map((item) => (
-          <DesktopSidebarSubMenuItem label={item.label} key={item.key} />
+          <DesktopSidebarSubMenuItem
+            label={item.label}
+            key={item.key}
+            href={item.href}
+          />
         ))}
     </>
   );
@@ -120,16 +136,28 @@ export default DesktopSidebar;
 
 function DesktopSidebarSubMenuItem({
   label,
+  href,
 }: {
   label: string;
   keyValue?: string;
+  href?: string;
 }) {
+  const router = useRouter();
   return (
     <div
       className="w-full bg-gray-700 p-2 flex items-center shadow-md px-8 border-spacing-1
      border-neutral-500 border-b-[1px] hover:cursor-pointer hover:bg-gray-800"
     >
-      <p className="text-xs text-neutral-200 tracking-wider">{label}</p>
+      <p
+        className="text-xs text-neutral-200 tracking-wider"
+        onClick={() => {
+          if (href) {
+            router.push(href);
+          }
+        }}
+      >
+        {label}
+      </p>
     </div>
   );
 }
