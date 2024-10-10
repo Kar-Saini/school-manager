@@ -3,7 +3,7 @@ import prisma from "../../libs/prismadb";
 
 export async function POST(request: NextRequest) {
   const body = await request.json();
-  const classExist = await prisma.class.findUnique({
+  const classExist = await prisma.class.findFirst({
     where: { label: body.label },
   });
   if (classExist) {
