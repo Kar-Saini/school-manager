@@ -1,12 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
-import primsa from "@/app/libs/prismadb";
+import prisma from "@/app/libs/prismadb";
 import bcrypt from "bcrypt";
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
     console.log(body);
-    const checkIfStudentExist = await primsa.student.findUnique({
+    const checkIfStudentExist = await prisma.student.findUnique({
       where: { email: body.email },
     });
     if (checkIfStudentExist?.id) {
@@ -14,7 +14,7 @@ export async function POST(request: NextRequest) {
     }
     const hasehdPassword = await bcrypt.hash(body.password, 10);
     const studentDetails = { ...body, password: hasehdPassword };
-    const newStudent = await primsa.student.create({ data: studentDetails });
+    const newStudent = await prisma.student.create({ data: studentDetails });
     console.log(newStudent);
     if (newStudent) {
       return NextResponse.json({
