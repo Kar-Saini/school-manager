@@ -8,6 +8,7 @@ type Subject = {
     id: string;
     label: string;
   };
+  createdAt?: string;
 };
 type Student = {
   id: string;
@@ -21,7 +22,7 @@ type Student = {
 type TableProps = {
   columns: {
     header: string;
-    key: keyof Subject | "class" | keyof Student | string;
+    key: keyof Subject | keyof Student | "class" | string;
   }[];
   data: Subject[] | Student[];
 };
@@ -53,7 +54,9 @@ const TableComponent = ({ columns, data }: TableProps) => {
                     key={col.key}
                     className="px-4 py-2 border-b text-gray-700"
                   >
-                    {col.key === "class" ? row.class?.label : row[col.key]}
+                    {col.key === "class" && "class" in row
+                      ? (row as Subject).class?.label
+                      : row[col.key as keyof typeof row] || "N/A"}
                   </td>
                 ))}
               </tr>
