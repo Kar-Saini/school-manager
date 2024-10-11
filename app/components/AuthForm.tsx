@@ -102,7 +102,6 @@ export default function AuthForm() {
             </Button>
           </div>
         </form>
-
         <div className="flex gap-2 justify-center text-sm mt-6 px-2 text-gray-500">
           <div>{variant === "LOGIN" ? "New?" : "Already have account?"}</div>
           <div onClick={toogleVariant} className="underline cursor-pointer">
@@ -110,6 +109,17 @@ export default function AuthForm() {
           </div>
         </div>
       </div>
+      <footer className="flex items-center justify-center w-full mt-10">
+        <span className="flex-grow border-t border-gray-800 mx-1"></span>
+        <p
+          className="text-xs uppercase  text-gray-500 mx-2
+         tracking-widest font-semibold"
+        >
+          <span className="text-gray-400">powered by</span>
+          <span className="text-gray-800"> · glintel technologies · </span>
+        </p>
+        <span className="flex-grow border-t border-gray-800 mx-1"></span>
+      </footer>
     </div>
   );
 }

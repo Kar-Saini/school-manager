@@ -85,13 +85,10 @@ model Class {
 model Exam {
   id       String   @id @default(cuid())
   examType ExamType
-
   teacherId String
   teacher   Teacher @relation(fields: [teacherId], references: [id])
-
   classId String
   class   Class  @relation(fields: [classId], references: [id])
-
   students Student[]
 }
 
