@@ -4,7 +4,7 @@ import React from "react";
 
 const page = () => {
   return (
-    <div className=" flex flex-col m-4 p-4">
+    <div className=" flex flex-col m-4 p-4 gap-y-4">
       <div>
         <h1 className="text-2xl font-semibold">Student Dashboard</h1>
       </div>

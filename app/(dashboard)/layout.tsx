@@ -4,7 +4,7 @@ import Appbar from "@/app/components/Appbar";
 
 const StudentLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <main className="h-full w-full">
+    <main className="h-full w-full overflow-y-auto">
       <Sidebar>
         <Appbar />
         {children}
