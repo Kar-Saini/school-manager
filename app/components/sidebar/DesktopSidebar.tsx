@@ -101,7 +101,9 @@ function DesktopSidebarItems({
           <Icon />
           {!collapse && (
             <p
-              className="text-sm text-neutral-200 tracking-wider"
+              className={`text-sm text-neutral-200 tracking-wider ${
+                isOpen && "text-yellow-500"
+              }`}
               onClick={() => {
                 if (href) {
                   router.push(href);

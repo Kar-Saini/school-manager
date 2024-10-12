@@ -79,7 +79,7 @@ const StudentPage = ({ params }: StudentPageProps) => {
                 width={300}
                 height={150}
                 alt="female"
-                className="rounded-full shadow-xl"
+                className="rounded-full shadow-xl p-1 bg-gray-400"
               />
             )}
           </div>

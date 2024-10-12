@@ -23,9 +23,8 @@ export const DESKTOP_SIDEBAR_ITEMS: DesktopSidebarMenuItem[] = [
     label: "Students",
     icon: PiStudent,
     key: "2",
-    href: "/students",
     submenu: [
-      { label: "All Students", key: "21" },
+      { label: "All Students", key: "21", href: "/students" },
       { label: "Student Detail", key: "22" },
       { label: "Admission Form", key: "23" },
       { label: "Student Promotion", key: "24" },

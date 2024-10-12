@@ -8,16 +8,21 @@ datasource db {
 }
 
 model Student {
-  id            String    @id @default(cuid())
-  name          String
-  email         String    @unique
-  username      String?
-  password      String
-  sex           Sex
-  role          Role
-  dob           String
-  admissionDate String
+  id              String  @id @default(cuid())
+  name            String
+  email           String  @unique
+  username        String?
+  dob             String
+  rollNo          String  @default("10")
+  sex             Sex
+  admissionNumber String @default("100")
   bloodGroup    String?
+  bio String?
+  photo           String?
+  password        String @default("mypw@123")
+  role            Role    @default(Student)
+  documentVerification Boolean @default(false)
+  admissionDate String
   parentId      String?
   parent        Parent?   @relation(fields: [parentId], references: [id])
   teachers      Teacher[]
@@ -33,11 +38,10 @@ model Parent {
   motherName    String
   email         String    @unique
   username      String?   @unique
-  role          Role
+  role          Role      @default(Parent)
   address       String
   contactNumber String
   annualIncome  String
-  studentId     String
   student       Student[]
 }
 
@@ -48,6 +52,7 @@ enum Sex {
 
 model Teacher {
   id            String    @id @default(cuid())
+  employeeNum   String?   @unique @default(cuid())
   name          String
   joiningDate   String?
   bloodGroup    String
@@ -56,7 +61,7 @@ model Teacher {
   email         String    @unique
   password      String
   username      String?   @unique
-  role          Role
+  role          Role      @default(Teacher)
   subject       Subject[]
   student       Student[]
   classes       Class[]
@@ -64,18 +69,18 @@ model Teacher {
 }
 
 model Subject {
-  id       String    @id @default(cuid())
-  label    String
-  classId  String
-  createdAt DateTime @default(now())
-  class    Class     @relation(fields: [classId], references: [id])
-  teachers Teacher[] 
-  students Student[]
+  id        String    @id @default(cuid())
+  label     String
+  classId   String
+  createdAt DateTime  @default(now())
+  class     Class     @relation(fields: [classId], references: [id])
+  teachers  Teacher[]
+  students  Student[]
 }
 
 model Class {
   id       String    @id @default(cuid())
-  label    String    
+  label    String
   subjects Subject[]
   students Student[]
   teachers Teacher[]
@@ -83,13 +88,13 @@ model Class {
 }
 
 model Exam {
-  id       String   @id @default(cuid())
-  examType ExamType
+  id        String    @id @default(cuid())
+  examType  ExamType
   teacherId String
-  teacher   Teacher @relation(fields: [teacherId], references: [id])
-  classId String
-  class   Class  @relation(fields: [classId], references: [id])
-  students Student[]
+  teacher   Teacher   @relation(fields: [teacherId], references: [id])
+  classId   String
+  class     Class     @relation(fields: [classId], references: [id])
+  students  Student[]
 }
 
 enum ExamType {

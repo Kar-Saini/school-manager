@@ -4,11 +4,11 @@ import React from "react";
 
 const page = () => {
   return (
-    <div className=" flex flex-col m-4 p-4 gap-y-4">
-      <div>
-        <h1 className="text-2xl font-semibold">Student Dashboard</h1>
+    <div>
+      <div className="p-4 bg-gray-200 rounded-sm flex flex-col gap-y-4">
+        <h1 className="text-xl font-semibold ">All Students Data</h1>
+        <AllStudentTable />
       </div>
-      <AllStudentTable />
       <div className="flex">
         <div>Students </div>
         <div>Calendar</div>

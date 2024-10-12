@@ -18,9 +18,10 @@ export async function POST(request: NextRequest) {
     console.log(newStudent);
     if (newStudent) {
       return NextResponse.json({
-        messgae: "Student added",
+        message: "Student added",
         id: newStudent.id,
         name: newStudent.name,
+        status: 200,
       });
     }
     return NextResponse.json({ message: "Failed" });
