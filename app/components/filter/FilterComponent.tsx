@@ -3,9 +3,13 @@ import { SearchFilters } from "@/app/components/student/AllStudentTable";
 const FilterComponent = ({
   searchFilters,
   setSearchFilters,
+  handleFilterSearch,
+  handleReset,
 }: {
   searchFilters: SearchFilters;
   setSearchFilters: (searchFilters: SearchFilters) => void;
+  handleFilterSearch: () => void;
+  handleReset: () => void;
 }) => {
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -22,12 +26,8 @@ const FilterComponent = ({
     });
   };
 
-  const handleReset = () => {
-    setSearchFilters({ name: "", class: "", sex: "Male" });
-  };
-  console.log(searchFilters);
   return (
-    <div className=" flex justify-between">
+    <div className=" flex justify-between my-1">
       <input
         type="text"
         name="name"
@@ -40,7 +40,7 @@ const FilterComponent = ({
         type="text"
         placeholder="Search by Class"
         className="p-2 outline-none rounded-sm"
-        value={searchFilters.class}
+        value={searchFilters.classLabel}
         name="class"
         onChange={handleInputChange}
       />
@@ -54,9 +54,11 @@ const FilterComponent = ({
         <option value="male">Male</option>
         <option value="female">Female</option>
       </select>
-
       <div className="flex gap-6">
-        <button className="bg-gray-900 px-3 text-gray-100 rounded-md hover:bg-blue-700 transition">
+        <button
+          className="bg-gray-900 px-3 text-gray-100 rounded-md hover:bg-blue-700 transition"
+          onClick={handleFilterSearch}
+        >
           Search
         </button>
         <button

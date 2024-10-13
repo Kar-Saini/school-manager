@@ -3,6 +3,9 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import FilterComponent from "../filter/FilterComponent";
+import { getStudentByFilter } from "@/app/actions/getStudentByFilter";
+import toast from "react-hot-toast";
+
 type Student = {
   id: string;
   name: string;
@@ -12,6 +15,7 @@ type Student = {
   bloodGroup: string;
   admissionDate: string;
 };
+
 const columns = [
   { header: "Student ID", key: "id" },
   { header: "Photo", key: "photo" },
@@ -25,33 +29,68 @@ const columns = [
   { header: "Blood Group", key: "bloodGroup" },
   { header: "Admission Date", key: "admissionDate" },
 ];
+
 export interface SearchFilters {
   name: string;
-  class: string;
+  classLabel: string;
   sex: "Male" | "Female";
 }
+
 const AllStudentTable = () => {
   const router = useRouter();
   const [studentData, setStudentData] = useState<Student[]>([]);
   const [searchFilters, setSearchFilters] = useState<SearchFilters>({
     name: "",
-    class: "",
+    classLabel: "",
     sex: "Male",
   });
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 8;
+
+  async function getStudentsData() {
+    const studentData = await axios("/api/student");
+    setStudentData(studentData.data.allStudents);
+  }
   useEffect(() => {
-    async function getStudentsData() {
-      const studentData = await axios("/api/student");
-      console.log(studentData);
-      setStudentData(studentData.data.allStudents);
-    }
     getStudentsData();
   }, []);
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = studentData.slice(indexOfFirstItem, indexOfLastItem);
+
+  const totalPages = Math.ceil(studentData.length / itemsPerPage);
+
+  const handlePageChange = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+  };
+
+  async function handleFilterSearch() {
+    const searchedStudents = await getStudentByFilter(searchFilters);
+    console.log(searchedStudents);
+    if (searchedStudents?.status === 200) {
+      toast.success(searchedStudents.message as string);
+      if (searchedStudents.students)
+        setStudentData(searchedStudents.students as Student[]);
+    } else {
+      toast.error(searchedStudents?.message as string);
+      setStudentData([]);
+    }
+  }
+
+  const handleReset = async () => {
+    setSearchFilters({ name: "", classLabel: "", sex: "Male" });
+    await getStudentsData();
+  };
+
   return (
     <div className="flex flex-col gap-y-4">
       <FilterComponent
         searchFilters={searchFilters}
         setSearchFilters={setSearchFilters}
+        handleFilterSearch={handleFilterSearch}
+        handleReset={handleReset}
       />
       <div className="overflow-x-auto border-[1px] border-black">
         <table className="min-w-full bg-white border border-gray-200">
@@ -68,9 +107,9 @@ const AllStudentTable = () => {
             </tr>
           </thead>
           <tbody>
-            {studentData.length > 0 ? (
-              studentData.map((row, rowIndex) => (
-                <tr key={rowIndex} className=" hover:bg-gray-100">
+            {currentItems.length > 0 ? (
+              currentItems.map((row, rowIndex) => (
+                <tr key={rowIndex} className="hover:bg-gray-100">
                   {columns.map((col) => (
                     <td
                       key={col.key}
@@ -109,12 +148,26 @@ const AllStudentTable = () => {
             ) : (
               <tr>
                 <td colSpan={columns.length} className="text-center py-4">
-                  Loading...
+                  No Data Available
                 </td>
               </tr>
             )}
           </tbody>
         </table>
+      </div>
+
+      <div className="flex justify-center mt-4">
+        {Array.from({ length: totalPages }, (_, index) => (
+          <button
+            key={index + 1}
+            onClick={() => handlePageChange(index + 1)}
+            className={`px-4 py-2 mx-1 border ${
+              currentPage === index + 1 ? "bg-blue-500 text-white" : "bg-white"
+            }`}
+          >
+            {index + 1}
+          </button>
+        ))}
       </div>
     </div>
   );
